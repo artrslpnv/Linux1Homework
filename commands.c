@@ -5,8 +5,7 @@ int Init() {
         int ret = create_filesystem("ArturSlepnevFileSystem");
         if (ret < 0) { return ret; }
         strcpy(cur_path, init_dir());
-        return 0;
-    }
+        return 0;}
     strcpy(cur_path, init_dir());
     return 0;
 }
@@ -23,8 +22,7 @@ void str_process(char *string, char **argv, int *argc) {
         (*argc)++;
     } else if (string[0] == '\0' && string[1] != '\0') {
         argv[(*argc)] = &string[1];
-        (*argc)++;
-    }
+        (*argc)++;}
     for (int i = 1; i <= count - 1; i++) {
         if (string[i] == '\0' && string[i + 1] != '\0') {
             argv[(*argc)] = &string[i + 1];
@@ -50,8 +48,7 @@ void rel_to_abs(char *relative, char *absolute) {
                         break;
                     } else if (new_path[k] == '/' && k == 0) {
                         new_path[k + 1] = '\0';
-                        break;
-                    }
+                        break;}
                 }
             } else {
                 if (new_path[strlen(new_path) - 1] != '/')
@@ -92,8 +89,7 @@ void ls(char **argv,
             }
             if (i == argc - 1) {
                 if (strcmp(cur_output, "") != 0)
-                    printf("%s", cur_output);
-            }
+                    printf("%s", cur_output);}
         }
     }
 
@@ -329,9 +325,8 @@ void touch(char **argv,
     if (argc == 1) { printf("wrong format\n"); }
     else {
         for (int i = 1; i <= argc - 1; i++) {
-
             rel_to_abs(argv[i], AbsPATH);
-            if (search_file(AbsPATH) == -1) { //找不到就直接創建
+            if (search_file(AbsPATH) == -1) {
                 for (int k = strlen(AbsPATH) - 1; k >= 0; k--) {
                     if (AbsPATH[k] == '/' && k != 0) {
                         AbsPATH[k] = '\0';
