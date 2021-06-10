@@ -138,6 +138,7 @@ int write_file (inode *inode_, void* file)
     int block_data_len;
     if(inode_->num[INDIRECT_BLOCK_GROUP_SIZE] == 0) {
         for (int i = 0; i < INDIRECT_BLOCK_GROUP_SIZE; i++) {
+            printf("%d",inode_->num[i]);
             if (inode_->num[i] == 0) {
                 block_inuse = i;
                 break;}}}
@@ -156,10 +157,9 @@ int write_file (inode *inode_, void* file)
             else {modify_block(
                     single_indirect_block.num12[i - INDIRECT_BLOCK_GROUP_SIZE], &file_buffer, SIZE_OF_BLOCK);}}
         for(; i < inode_->file_size / SIZE_OF_BLOCK + 1; i++) {
-            // determine the length of block and copy block into buffer
             if(i+1 == inode_->file_size / SIZE_OF_BLOCK + 1) { // last block of file
                 block_data_len = inode_->file_size % SIZE_OF_BLOCK;
-                //LOG_DEBUG("Block_num increase - Write Blocks. file_size is %d. block_data_len is %d", inode_->file_size, block_data_len);
+
             } else {block_data_len = SIZE_OF_BLOCK;}
             memcpy(file_buffer,file + i*SIZE_OF_BLOCK, block_data_len);
             write_block(&block_id_buf, &file_buffer, block_data_len);

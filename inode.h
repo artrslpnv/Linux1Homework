@@ -4,7 +4,6 @@
 #include "filesystem_and_blocks.h"
 
 #define NUMBER_OF_BLOCKS_AND_INODES 4096
-#define INODE_SIZE  256
 #define BYTE_SIZE 8
 #define INODE_SIZE 128
 #define INODE_NUM 4096
@@ -19,7 +18,7 @@ typedef struct inode {
     char filename[32];
     int group_id;
     int num[15];
-    char to_align[12]
+    char to_align[12];
 } inode;
 
 
@@ -51,12 +50,6 @@ int clear_inode_bitmap (int id);
 
 int query_inode_bitmap (int id);
 
-int dump_inode_bitmap ();
-
-int dump_inode (inode *inode);
-
-int dump_block (int block_id, void *address, size_t len);
-
 int query_inode (inode *inode);
 
 int update_inode (inode *inode);
@@ -75,11 +68,6 @@ int delete_file (inode *inode);
 
 int write_file (inode *inode, void* file);
 
-int bitmap_set_inode(int id);
-
-int bitmap_clear_inode (int id);
-
-int bitmap_inode_query (int id);
 
 char* init_dir();
 
@@ -89,7 +77,6 @@ int search_dir(const char *pwd, const char *foldername);
 
 int create_dir(const char *pwd, const char *foldername);
 
-int rename_dir(const char *pwd, const char *foldername, const char *newname);
 
 int change_dir(const char* destination);
 

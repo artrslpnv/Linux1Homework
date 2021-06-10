@@ -113,35 +113,6 @@ int load_filesystem(const char *path)
         return 0;} else {return -1;}
 }
 
-int modify_super_block(void *block, int block_input_length)
-{
-    int byte_written;
-    if(file_state > 0) {
-        if((file_state = open(file_system_path, O_RDWR)) < 0) {return -1;}
-        if(lseek(file_state, strlen(HEADER) + BLOCKS_NUMBER/BYTE_SIZE, SEEK_SET) < 0) {return -3;}
-        if(block_input_length <SIZE_OF_SUPER_BLOCK) {
-            if(write(file_state, block, block_input_length) != block_input_length) {return -4;}
-            byte_written = block_input_length;} else {
-            if(write(file_state, block, SIZE_OF_SUPER_BLOCK) != SIZE_OF_SUPER_BLOCK) {return -4;}
-            byte_written = SIZE_OF_SUPER_BLOCK;}
-        close(file_state);
-    } else {return -1;}
-    return byte_written;
-}
-
-int read_super_block(void *block, int block_output_length)
-{
-    int byte_read;
-    if(file_state > 0) {
-        if((file_state = open(file_system_path, O_RDWR)) < 0) {return -1;}
-        if(lseek(file_state, strlen(HEADER) + BLOCKS_NUMBER/BYTE_SIZE, SEEK_SET) < 0) {return -3;}
-        if(read(file_state, block, block_output_length) != block_output_length) {return -4;}
-        byte_read = block_output_length;
-        close(file_state);
-    } else {return -1;}
-    return byte_read;
-}
-
 int modify_block(const int block_id, void *block, int block_input_length)
 {
     int byte_written = 0;

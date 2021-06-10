@@ -22,33 +22,11 @@
 #include <string.h>
 #include <unistd.h>
 
-int create_file_for_filesystem(const char *path);
 
-int load_file_for_filesystem(const char *path);
-
-int read_file_by_path(const char *path, void **buf);
 
 int create_filesystem(const char *path);
 
 int load_filesystem(const char *path);
-
-int read_size_bytes_of_file_by_path(const char *path, void *buf, int size);
-
-int write_file_by_path(const char *path, void *buf, int size);
-
-int delete_file_by_path(const char *path);
-
-int create_file(const char *pwd, const char *fname);
-
-int rename_file(const char *pwd, const char *fname1, const char *fname2);
-
-int search_file(const char *fpath);
-
-int search_empty_index();
-
-int modify_super_block(void *block, int block_input_length);
-
-int read_super_block(void *block, int block_output_length);
 
 int modify_block(const int block_id, void *block, int block_input_length);
 
